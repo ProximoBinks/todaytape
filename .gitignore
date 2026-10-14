@@ -1,0 +1,16 @@
+.DS_Store
+.build/
+build/
+xcuserdata/
+DerivedData/
+*.xcuserstate
+.idea/
+.swiftpm/
+.vercel/
+
+# Google secrets: never commit these
+.env
+.env.*
+credentials.json
+tokens.json
+client_secret*.json

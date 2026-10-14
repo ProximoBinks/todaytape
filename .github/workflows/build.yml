@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Swift version
+        run: swift --version
+
+      - name: Test
+        run: ./scripts/test.sh
+
+      - name: Build universal app
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            export TODAYTAPE_VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          ./build.sh --release
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Todaytape
+          path: build/Todaytape-*.zip*
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
+            gh release create "$GITHUB_REF_NAME" --title "Todaytape ${GITHUB_REF_NAME#v}" --generate-notes
+          gh release upload "$GITHUB_REF_NAME" build/Todaytape-*.zip build/Todaytape-*.zip.sha256 --clobber
