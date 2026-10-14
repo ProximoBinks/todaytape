@@ -123,6 +123,16 @@ site/                        the website (static HTML)
 
 Issues and pull requests are welcome. Run `./scripts/test.sh` before you open a PR, and never commit a client secret, `credentials.json` or `tokens.json`.
 
+## Star History
+
+<a href="https://www.star-history.com/?type=date&amp;repos=ProximoBinks%2Ftodaytape">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ProximoBinks/todaytape&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ProximoBinks/todaytape&amp;type=date&amp;legend=top-left" />
+    <img alt="Star History Chart for todaytape" src="https://api.star-history.com/chart?repos=ProximoBinks/todaytape&amp;type=date&amp;legend=top-left" />
+  </picture>
+</a>
+
 ## License
 
 [MIT](LICENSE) © 2026 Elliot Koh
